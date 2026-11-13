@@ -1,0 +1,82 @@
+/* CSS Variables / Design System */
+:root {
+  /* Colors - Dark mode (primary) */
+  --bg: #070f20;
+  --bg-alt: #0b1730;
+  --panel: #101f3b;
+  --panel-hi: #15294b;
+  --line: #243a63;
+  --fg: #eaf0f9;
+  --muted: #9fb2cf;
+  --accent: #e3a857;
+  --accent-ink: #1b1204;
+  --accent-soft: rgba(227, 168, 87, .13);
+  --glow: rgba(227, 168, 87, .22);
+  --surface: #1a2d55;
+  --border: #3a5a8c;
+
+  /* === TYPOGRAPHY SCALE === */
+  --type-scale-1: 0.75rem;     /* 12px - captions, meta */
+  --type-scale-2: 0.8125rem;  /* 13px - small body */
+  --type-scale-3: 0.875rem;   /* 14px - body default */
+  --type-scale-4: 1rem;       /* 16px - paragraph base */
+  --type-scale-5: 1.125rem;   /* 18px - lead paragraphs */
+  --type-scale-6: 1.25rem;    /* 20px - subheadings */
+  --type-scale-7: 1.5rem;     /* 24px - section headings */
+  --type-scale-8: 1.875rem;   /* 30px - major headings */
+  --type-scale-9: 2.25rem;    /* 36px - hero headings */
+  --type-scale-10: 3rem;      /* 48px - display headings */
+
+/* Line heights per type scale */
+  --line-1: 1.4;              /* captions */
+  --line-2: 1.5;              /* small body */
+  --line-3: 1.55;             /* body default */
+  --line-4: 1.6;              /* paragraph base */
+  --line-5: 1.65;             /* lead paragraphs */
+  --line-6: 1.7;              /* subheadings */
+  --line-7: 1.8;              /* major headings */
+  --line-8: 1.9;              /* hero headings */
+
+/* Derived typography classes */
+  --type-caption: var(--type-scale-1) var(--line-1);
+  --type-body1: var(--type-scale-4) var(--line-4);
+  --type-body2: var(--type-scale-3) var(--line-3);
+  --type-heading1: var(--type-scale-8) var(--line-7);
+  --type-heading2: var(--type-scale-7) var(--line-6);
+  --type-heading3: var(--type-scale-6) var(--line-6);
+
+/* Font families */
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+/* Layout scales */
+  --header-height: 72px;
+  --nav-height: 64px;
+  --section-padding: 96px 0;
+
+/* Transition */
+  --transition-base: .25s cubic-bezier(.22, 1, .36, 1);
+  --transition-fast: .15s ease;
+  --transition-slow: .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Light mode */
+@media (color-scheme: light) {
+  :root {
+    --bg: #f3f6fb;
+    --bg-alt: #e8edf5;
+    --panel: #ffffff;
+    --panel-hi: #f7f9fd;
+    --line: #c7d2e3;
+    --fg: #0c1a33;
+    --muted: #46587a;
+    --accent: #8f5300;
+    --accent-ink: #ffffff;
+    --accent-soft: rgba(143, 83, 0, .1);
+    --glow: rgba(143, 83, 0, .16);
+    --fg: #0c1a33;
+    --surface: #f0f3f8;
+    --border: #d0d8e0;
+  }
+}

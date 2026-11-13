@@ -1,0 +1,18 @@
+/* Focus ring component styles */
+.focus-ring {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Focus-visible state for all interactive elements */
+a:focus-visible,
+button:focus-visible,
+.input:focus-visible {
+  @include focus-ring;
+}
