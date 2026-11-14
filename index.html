@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/_variables.css">
 <link rel="stylesheet" href="css/_base.css">
 <link rel="stylesheet" href="css/_layout.css">
+<link rel="stylesheet" href="css/_polish.css">
 </head>
 <body>
 
@@ -22,6 +23,15 @@
 <a class="nav-brand" href="#home">
 <i class="nav-icon">OO</i>Olayinka Oyeniyi
 </a>
+
+<!-- ===== NEW: Mobile menu toggle ===== -->
+<button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+<!-- ===================================== -->
+
 <ul class="nav-links">
 <li><a class="nav-link" href="#about">About</a></li>
 <li><a class="nav-link" href="#capabilities">Capabilities</a></li>
@@ -33,6 +43,23 @@
 </div>
 </nav>
 <div class="scroll-progress"></div>
+
+<!-- ===== NEW: Mobile overlay navigation ===== -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <button class="close-btn" type="button" aria-label="Close navigation">
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a class="nav-link" href="#about">About</a></li>
+    <li><a class="nav-link" href="#capabilities">Capabilities</a></li>
+    <li><a class="nav-link" href="#recognition">Recognition</a></li>
+    <li><a class="nav-link" href="#career">Career Path</a></li>
+    <li><a class="nav-link" href="#contact">Contact</a></li>
+  </ul>
+  <a class="btn-primary nav-cta" href="#contact">Contact</a>
+</div>
+<!-- ====================================== -->
 </header>
 
 <!-- Partial: body (included via server-side or build step) -->
@@ -40,6 +67,7 @@
 <!-- Hero Section -->
 <section class="hero" id="home">
 <div class="hero-container">
+<div class="hero-copy">
 <div class="hero-badge">Managing Director &bull; Prec Pearl Limited</div>
 <h1 class="hero-name">
 <span class="name-part">Olayinka</span>
@@ -57,7 +85,8 @@ An engineer who came up through pipelines, piping and project delivery, and now 
 </div>
 </div>
 <div class="hero-portrait">
-<img src="assets/portrait.jpg" alt="Olayinka Oyeniyi" loading="lazy">
+<img src="assets/portrait.jpg" alt="Olayinka Oyeniyi" fetchpriority="high">
+</div>
 </div>
 </section>
 
@@ -94,16 +123,12 @@ An engineer who came up through pipelines, piping and project delivery, and now 
 <p>Olayinka Ajibola Oyeniyi began his career in 2002 as a mechanical engineer. Over six years he worked as a project, piping and pipeline engineer across Nigerian oil, gas and energy services companies, then took the lead at <strong>Prec Pearl Limited</strong> in November 2008.</p>
 <p>Prec Pearl is an ISO-certified indigenous engineering firm founded in 2003, headquartered in Yaba, Lagos, with an office in Accra, Ghana. It designs, installs, develops and maintains infrastructure, mainly for Nigeria's telecommunications sector.</p>
 </div>
-<blockquote class="quote-block">
-<p class="quote-text">[Add a two or three sentence statement from Mr Oyeniyi - this appears in his own words]</p>
-<p class="quote-attribution">- Olayinka Oyeniyi</p>
-</blockquote>
-</div>
-<div class="about-visual">
-<div class="portrait-card">
-<span class="portrait-initial large">OO</span>
-<div class="portrait-badge">Olayinka Oyeniyi<br>Managing Director &middot; Prec Pearl</div>
-</div>
+<aside class="about-highlight">
+<span class="highlight-label">Leadership</span>
+<h3>Engineering, delivered at scale.</h3>
+<p>From hands-on project and pipeline engineering to leading Prec Pearl's telecommunications and infrastructure work across Lagos and Accra.</p>
+<div class="highlight-stat"><strong>2008</strong><span>Leading Prec Pearl Limited</span></div>
+</aside>
 </div>
 </div>
 </section>
@@ -221,7 +246,7 @@ An engineer who came up through pipelines, piping and project delivery, and now 
 <section class="section principles" id="principles">
 <div class="section-container">
 <h2 class="section-subheading">How the firm works</h2>
-<div class.principles-grid>
+<div class="principles-grid">
 <div class="principle-card">
 <span class="principle-icon">M</span>
 <h3>Mission</h3>

@@ -15,6 +15,16 @@
   --surface: #1a2d55;
   --border: #3a5a8c;
 
+  /* ===== NEW: Color palette extensions ===== */
+  --accent2: #4e9fdf;   /* Secondary accent - blue */
+  --accent2-ink: #ffffff;
+  --accent-soft2: rgba(78, 159, 223, .13);
+  --glow2: rgba(78, 159, 223, .22);
+  --accent3: #f5a623;   /* Tertiary accent - amber */
+  --accent3-ink: #1b1204;
+  --accent-soft3: rgba(245, 166, 35, .13);
+  --glow3: rgba(245, 166, 35, .22);
+
   /* === TYPOGRAPHY SCALE === */
   --type-scale-1: 0.75rem;     /* 12px - captions, meta */
   --type-scale-2: 0.8125rem;  /* 13px - small body */
@@ -27,7 +37,7 @@
   --type-scale-9: 2.25rem;    /* 36px - hero headings */
   --type-scale-10: 3rem;      /* 48px - display headings */
 
-/* Line heights per type scale */
+  /* Line heights per type scale */
   --line-1: 1.4;              /* captions */
   --line-2: 1.5;              /* small body */
   --line-3: 1.55;             /* body default */
@@ -37,7 +47,7 @@
   --line-7: 1.8;              /* major headings */
   --line-8: 1.9;              /* hero headings */
 
-/* Derived typography classes */
+  /* Derived typography classes */
   --type-caption: var(--type-scale-1) var(--line-1);
   --type-body1: var(--type-scale-4) var(--line-4);
   --type-body2: var(--type-scale-3) var(--line-3);
@@ -45,20 +55,23 @@
   --type-heading2: var(--type-scale-7) var(--line-6);
   --type-heading3: var(--type-scale-6) var(--line-6);
 
-/* Font families */
+  /* Font families */
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "DM Sans", "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-/* Layout scales */
+  /* Layout scales */
   --header-height: 72px;
   --nav-height: 64px;
   --section-padding: 96px 0;
 
-/* Transition */
+  /* Transition */
   --transition-base: .25s cubic-bezier(.22, 1, .36, 1);
   --transition-fast: .15s ease;
   --transition-slow: .6s cubic-bezier(.22, 1, .36, 1);
+
+  /* ===== NEW: Reduced motion ===== */
+  --reduce-motion: normal;
 }
 
 /* Light mode */

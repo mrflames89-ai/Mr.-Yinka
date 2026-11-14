@@ -8,6 +8,39 @@
   var lastScroll = 0;
 
   /* =====================
+     NEW: Mobile navigation toggle
+     ===================== */
+  function setNav(isOpen) {
+    var mobileNav = document.getElementById("mobileNav");
+    var toggle = document.querySelector(".nav-toggle");
+    if (!mobileNav || !toggle) return;
+
+    mobileNav.classList.toggle("active", isOpen);
+    mobileNav.setAttribute("aria-hidden", String(!isOpen));
+    toggle.classList.toggle("active", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+    document.body.classList.toggle("body-noscroll", isOpen);
+  }
+
+  var navToggle = document.querySelector(".nav-toggle");
+  var mobileNav = document.getElementById("mobileNav");
+  if (navToggle && mobileNav) {
+    navToggle.addEventListener("click", function () {
+      setNav(navToggle.getAttribute("aria-expanded") !== "true");
+    });
+    mobileNav.querySelector(".close-btn").addEventListener("click", function () {
+      setNav(false);
+    });
+    mobileNav.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function () { setNav(false); });
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") setNav(false);
+    });
+  }
+
+  /* =====================
      1. Reduced motion check
      ===================== */
   if (reduce) {
@@ -23,6 +56,7 @@
     document.querySelector(".scroll-progress").style.width = (progress * 100).toFixed(1) + "%";
   }
   window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress, { passive: true });
   updateProgress();
 
   /* =====================
@@ -82,6 +116,7 @@
           counterIO.unobserve(e.target);
           var el = e.target;
           var end = parseInt(el.getAttribute("data-count"), 10);
+          var start = 0;
           var duration = 1800;
           var startTime = null;
 
@@ -90,12 +125,7 @@
             var progress = Math.min((currentTime - startTime) / duration, 1);
             var eased = 1 - Math.pow(1 - progress, 3);
             var value = Math.round(start + (end - start) * eased);
-            // Format with + suffix and comma for thousands
-            if (el.closest(".fig-item")) {
-              el.textContent = value.toLocaleString() + "+";
-            } else {
-              el.textContent = value + "+";
-            }
+            el.textContent = value.toLocaleString();
             if (progress < 1) {
               requestAnimationFrame(tick);
             }
@@ -113,36 +143,16 @@
   function initHeroLoad() {
     if (reduce) return;
 
-    var startTime = performance.now();
-
     var heroElements = document.querySelectorAll(
       ".hero-badge, .hero-name .name-part, .hero-statement, .hero-role, .hero-actions, .hero-portrait"
     );
 
     heroElements.forEach(function (el, i) {
-      el.style.opacity = "0";
-      el.style.transform = "translateY(28px)";
-      el.style.transition = "opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1)";
-      el.style.transitionDelay = (i * 110) + "ms";
-      el.setAttribute("data-d", i);
+      el.classList.add("hero-intro");
+      el.style.setProperty("--hero-delay", (i * 85) + "ms");
     });
 
-    (function runHeroLoad(time) {
-      var elapsed = time - startTime;
-      heroElements.forEach(function (el) {
-        var delay = parseInt(el.getAttribute("data-d"), 10) * 110;
-        if (elapsed > delay) {
-          el.style.opacity = "1";
-          el.style.transform = "none";
-        }
-      });
-      var stillHidden = Array.from(heroElements).some(function (el) {
-        return el.style.opacity === "0";
-      });
-      if (stillHidden) {
-        requestAnimationFrame(runHeroLoad);
-      }
-    })();
+    html.classList.add("hero-ready");
   }
 
   /* =====================
@@ -150,7 +160,7 @@
      ===================== */
   function initSectionReveal() {
     var revealItems = document.querySelectorAll(
-      ".fig-item, .cap-card, .award-card, .principle-card, .project-slot, .timeline-node, .about-text p, .quote-block"
+      ".section-subheading, .fig-item, .cap-card, .award-card, .principle-card, .career-timeline, .timeline-node, .project-slot, .about-text p, .about-highlight, .contact-card, .contact-details"
     );
 
     if ("IntersectionObserver" in window && !reduce) {
@@ -158,8 +168,7 @@
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) {
-            e.target.style.opacity = "1";
-            e.target.style.transform = "none";
+            e.target.classList.add("is-visible");
             io.unobserve(e.target);
           }
         });
@@ -167,66 +176,15 @@
         threshold: 0.12,
         rootMargin: "0px 0px -6% 0px"
       });
-      revealItems.forEach(function (el) {
-        el.style.opacity = "0";
-        el.style.transform = "translateY(24px)";
-        el.style.transition = "opacity .6s cubic-bezier(.22, 1, .36, 1), transform .6s cubic-bezier(.22, 1, .36, 1)";
+      revealItems.forEach(function (el, i) {
+        el.classList.add("reveal-on-scroll");
+        el.style.setProperty("--reveal-delay", (i % 4 * 75) + "ms");
         io.observe(el);
       });
-      setTimeout(function () {
-        revealItems.forEach(function (el) {
-          el.style.opacity = "1";
-          el.style.transform = "none";
-        });
-      }, 5000);
     } else {
       revealItems.forEach(function (el) {
-        el.style.opacity = "1";
-        el.style.transform = "none";
+        el.classList.add("is-visible");
       });
-    }
-  }
-
-  /* =====================
-     8. Enhanced career timeline
-     ===================== */
-  function initTimeline() {
-    var timeline = document.getElementById("career");
-    if (!timeline) return;
-
-    var runEl = timeline.querySelector(".career-timeline");
-    if (!runEl) return;
-
-    function sizeRun() {
-      if (runEl) {
-        runEl.style.setProperty("--run-h", Math.max(runEl.offsetHeight - 50, 80) + "px");
-      }
-    }
-    sizeRun();
-    window.addEventListener("resize", sizeRun);
-
-    if (!reduce) {
-      if (!runEl.querySelector(".timeline-pulse")) {
-        var pulse = document.createElement("div");
-        pulse.className = "timeline-pulse";
-        pulse.style.cssText = [
-          "position: absolute;",
-          "left: 10px;",
-          "top: 0;",
-          "width: 6px;",
-          "height: 100%;",
-          "border-radius: 0 4px 4px 0;",
-          "background: var(--accent);",
-          "animation: travel 5.5s linear infinite;",
-          "box-shadow: 0 0 12px var(--glow);",
-          "pointer-events: none;",
-          "z-index: 10;",
-          "opacity: 0;",
-          "transition: opacity .3s;",
-          ";"
-        ].join("");
-        runEl.parentNode.insertBefore(pulse, runEl);
-      }
     }
   }
 
@@ -237,14 +195,10 @@
     initCounters();
     initHeroLoad();
     initSectionReveal();
-    initTimeline();
     updateProgress();
   }
 
-  var startTime = performance.now();
   init();
-
-  setInterval(updateProgress, 50);
 
   /* =====================
      10. Smooth scroll for anchor links
@@ -261,24 +215,10 @@
         var targetPos = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
         window.scrollTo({
           top: targetPos,
-          behavior: "smooth"
+          behavior: reduce ? "auto" : "smooth"
         });
       }
     });
   });
-
-  /* =====================
-     11. Initialize all section reveal on load
-     ===================== */
-  // Ensure all elements are visible after 5 seconds
-  setTimeout(function () {
-    var revealItems = document.querySelectorAll(
-      ".fig-item, .cap-card, .award-card, .principle-card, .project-slot, .timeline-node, .about-text p, .quote-block"
-    );
-    revealItems.forEach(function (el) {
-      el.style.opacity = "1";
-      el.style.transform = "none";
-    });
-  }, 5000);
 
 })();

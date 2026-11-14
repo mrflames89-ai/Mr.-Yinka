@@ -1,8 +1,8 @@
 /* ==========================================================
    Reset & Base
    ========================================================== */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0 }
+html { scroll-behavior: smooth }
 body {
   font: var(--type-scale-3) var(--line-3) var(--font-body);
   background: var(--bg);
@@ -11,36 +11,124 @@ body {
   overflow-x: hidden;
   color-scheme: dark;
 }
-a { color: inherit; text-decoration: none; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px }
+img { max-width: 100%; display: block }
 
 /* ==========================================================
-   Utility Classes
+   UTILITY CLASSES
    ========================================================== */
-.wrap { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); }
+.wrap { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px) }
 
-.type-display1 { font: var(--type-scale-10) var(--line-8); }
-.type-display2 { font: var(--type-scale-9) var(--line-8); }
-.type-heading1 { font: var(--type-scale-8) var(--line-7); }
-.type-heading2 { font: var(--type-scale-7) var(--line-6); }
-.type-heading3 { font: var(--type-scale-6) var(--line-6); }
-.type-body1 { font: var(--type-scale-4) var(--line-4); }
-.type-body2 { font: var(--type-scale-3) var(--line-3); }
-.type-caption { font: var(--type-caption); text-transform: uppercase; letter-spacing: .15em; }
-.type-meta { font: var(--type-scale-2) var(--line-2); color: var(--muted); }
+/* ==========================================================
+   NEW: Mobile nav active state
+   ========================================================== */
+.main-nav.mobile-active .nav-links {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  width: 100%;
+  background: rgba(7, 15, 32, .98);
+  backdrop-filter: blur(20px);
+  flex-direction: column;
+  padding: 80px 32px 32px;
+  height: calc(100vh - var(--nav-height));
+  overflow-y: auto;
+  gap: 32px;
+  z-index: 998;
+}
+.main-nav.mobile-active .nav-link {
+  font: var(--type-heading2) var(--line-7);
+  color: var(--fg);
+}
+.main-nav.mobile-active .nav-link::after { display: none }
+.main-nav.mobile-active .nav-cta { margin: 16px 0 0 }
+
+.type-display1 { font: var(--type-scale-10) var(--line-8) }
+.type-display2 { font: var(--type-scale-9) var(--line-8) }
+.type-heading1 { font: var(--type-scale-8) var(--line-7) }
+.type-heading2 { font: var(--type-scale-7) var(--line-6) }
+.type-heading3 { font: var(--type-scale-6) var(--line-6) }
+.type-body1 { font: var(--type-scale-4) var(--line-4) }
+.type-body2 { font: var(--type-scale-3) var(--line-3) }
+.type-caption { font: var(--type-caption); text-transform: uppercase; letter-spacing: .15em }
+.type-meta { font: var(--type-scale-2) var(--line-2); color: var(--muted) }
 
 /* Sections */
-.section { padding: var(--section-padding); }
-.section .wrap { padding: 0 clamp(20px, 4vw, 32px); }
+.section { padding: var(--section-padding) }
+.section .wrap { padding: 0 clamp(20px, 4vw, 32px) }
 
 /* Links */
-a:hover { color: var(--accent); }
+a:hover { color: var(--accent) }
 
-/* Buttons */
-.btn { font: var(--type-scale-5) var(--line-5); padding: 14px 28px; border-radius: 999px; border: 1px solid var(--line); transition: var(--transition-base); display: inline-flex; align-items: center; gap: 8px; }
-.btn:hover { transform: translateY(-3px); border-color: var(--accent); }
-.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.btn.primary:hover { box-shadow: 0 16px 48px var(--glow); }
-.btn.secondary { color: var(--fg); border-color: var(--muted); }
-.btn.secondary:hover { color: var(--accent); border-color: var(--accent); }
+/* ==========================================================
+   Buttons
+   ========================================================== */
+.btn { font: var(--type-scale-5) var(--line-5); padding: 14px 28px; border-radius: 999px; border: 1px solid var(--line); transition: var(--transition-base); display: inline-flex; align-items: center; gap: 8px; position: relative; overflow: hidden }
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--accent-soft);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width .3s, height .3s
+}
+.btn:hover { transform: translateY(-3px); border-color: var(--accent) }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent) }
+.btn.primary:hover { box-shadow: 0 16px 48px var(--glow) }
+.btn.secondary { color: var(--fg); border-color: var(--muted) }
+.btn.secondary:hover { color: var(--accent); border-color: var(--accent) }
+.btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px }
+
+/* ==========================================================
+   Body scroll lock when mobile nav is open
+   ========================================================== */
+.body-noscroll { overflow: hidden; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+  .nav-cta, .btn { transition: none }
+  .figures-grid, .bento-grid, .projects-grid, .awards-grid, .principles-grid,
+  .about-content, .quote-block, .career-timeline, .project-slot { transition: none; opacity: 1; transform: none }
+  .cap-card { transition: none }
+  .project-slot { transition: border-color 0s }
+  .timeline-node { transition: none; animation: none }
+  .scroll-progress { display: none }
+  .hero-badge, .hero-name, .hero-statement, .hero-role, .hero-actions, .hero-portrait { opacity: 1; transform: none }
+  .cap-card:hover { transform: none }
+}
+
+/* ==========================================================
+   Links
+   ========================================================== */
+a:hover { color: var(--accent) }
+
+/* ==========================================================
+   Sections
+   ========================================================== */
+.section { padding: var(--section-padding) }
+.section .wrap { padding: 0 clamp(20px, 4vw, 32px) }
+
+/* ==========================================================
+   Scroll progress
+   ========================================================== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  z-index: 999;
+  width: 0%;
+  transition: width .1s ease-out
+}
+
+/* ==========================================================
+   Focus-visible improvements for all interactive elements
+   ========================================================== */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px }
