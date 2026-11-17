@@ -650,14 +650,18 @@ html.hero-ready .hero-intro {
   .hero-container {
     width: min(100% - 40px, 620px);
     min-height: 0;
-    grid-template-columns: 1fr;
-    gap: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 58px 0 48px;
   }
-  .hero-copy { order: 1 }
+  .hero-copy { display: contents }
+  .hero-badge { order: 1 }
+  .hero-name { order: 2 }
+  .hero-statement { order: 3 }
   .hero-name { font-size: clamp(3.4rem, 13vw, 5.4rem) }
-  .hero-actions { display: flex; align-items: stretch; flex-direction: column; margin-bottom: 8px }
-  .hero-portrait { order: 2; width: min(78%, 360px); justify-self: center; aspect-ratio: 5 / 4; border-radius: 28px; margin-top: 8px }
+  .hero-portrait { order: 4; width: min(78%, 360px); align-self: center; aspect-ratio: 5 / 4; border-radius: 28px; margin: 14px 0 8px }
+  .hero-actions { order: 5; display: flex; align-items: stretch; flex-direction: column; width: 100%; margin-top: 4px }
   .hero-portrait img { object-position: center 24% }
   .section-container { width: min(100% - 40px, 620px) }
   .figures-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; padding: 14px 0 }
