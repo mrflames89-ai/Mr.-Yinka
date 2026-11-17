@@ -294,6 +294,23 @@ a { transition: color var(--transition-fast), border-color var(--transition-fast
 }
 .highlight-stat strong { color: var(--accent); font-family: var(--font-display); font-size: 28px; line-height: 1 }
 .highlight-stat span { color: var(--muted); font-size: 12px; font-weight: 600 }
+.leadership-quote blockquote { margin: 18px 0 0 }
+.leadership-quote blockquote p {
+  margin: 0;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 34px);
+  font-style: italic;
+  line-height: 1.35;
+}
+.leadership-quote cite {
+  display: block;
+  margin-top: 18px;
+  color: var(--accent);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+}
 
 .capabilities, .career, .education { background: rgba(12, 23, 39, .64) }
 .bento-grid {
@@ -336,9 +353,16 @@ a { transition: color var(--transition-fast), border-color var(--transition-fast
   box-shadow: 0 20px 46px rgba(0, 0, 0, .22);
   transform: translateY(-3px);
 }
+.company-services-link {
+  margin-top: 22px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+}
+.company-services-link a { text-decoration: underline; text-underline-offset: 4px }
 
 .recognition { background: linear-gradient(180deg, transparent, rgba(16, 29, 45, .38)) }
-.awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 30px }
+.awards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 30px }
 .award-card { padding: clamp(24px, 4vw, 34px); gap: 12px }
 .award-year { font-family: var(--font-display); font-size: 38px; font-weight: 700; line-height: 1 }
 .award-card p, .award-note { color: var(--muted); font-size: 13px; line-height: 1.65 }
@@ -406,6 +430,13 @@ a { transition: color var(--transition-fast), border-color var(--transition-fast
 .project-slot { min-height: 230px; padding: 26px; border-style: solid }
 .project-slot .proj-label { margin-bottom: 0; color: var(--accent); font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em }
 .project-slot .proj-name { margin: 0 }
+.project-slot .proj-stat {
+  display: block;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.1;
+}
 .project-slot .proj-desc { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7 }
 .education { max-width: none }
 .education .section-container { max-width: 1120px }
@@ -418,12 +449,13 @@ a { transition: color var(--transition-fast), border-color var(--transition-fast
 }
 .contact .section-subheading { margin-bottom: 0 }
 .contact-grid {
-  grid-template-columns: 1fr 1fr 1.15fr;
+  grid-template-columns: 1.35fr .65fr;
   gap: 16px;
   margin-top: 34px;
   opacity: 1;
   transform: none;
 }
+.contact-form,
 .contact-card, .contact-details {
   min-width: 0;
   padding: 24px;
@@ -431,6 +463,51 @@ a { transition: color var(--transition-fast), border-color var(--transition-fast
   border-radius: 18px;
   background: rgba(8, 15, 29, .34);
 }
+.contact-form { display: grid; gap: 10px }
+.contact-form label { color: var(--fg); font-size: 12px; font-weight: 700 }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(8, 15, 29, .58);
+  color: var(--fg);
+  font: var(--type-body1) var(--line-4);
+  padding: 12px 14px;
+  resize: vertical;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 2px;
+}
+.contact-form .btn-primary { justify-self: start; margin-top: 4px }
+.contact-form .form-placeholder { margin: 2px 0 0; color: var(--muted); font-size: 11px }
+.linkedin-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid rgba(59, 198, 176, .35);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--fg) !important;
+  font-size: 13px;
+  font-weight: 700;
+}
+.linkedin-button span { color: var(--muted); font-size: 10px }
+.company-offices { margin-top: 16px }
+.company-offices h3 { margin-bottom: 12px; font-size: 18px }
+.office-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px }
+.office-grid > div { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(8, 15, 29, .28) }
+.office-grid strong { color: var(--accent); font-size: 12px; text-transform: uppercase }
+.office-grid p { margin: 6px 0 0; color: var(--muted); font-size: 13px }
+.closing-cta { text-align: center; background: var(--panel) }
+.closing-cta h2 { margin-bottom: 24px; font-family: var(--font-display); font-size: clamp(36px, 6vw, 64px) }
+.closing-cta .btn-primary { display: inline-flex }
+.site-footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted); font-size: 12px }
 .contact-card h3 { margin-bottom: 14px; font-size: 18px; font-weight: 700 }
 .contact-card p, .contact-details p { color: var(--muted); font-size: 13px; line-height: 1.75 }
 .contact-card p { margin-bottom: 14px }
@@ -511,10 +588,13 @@ html.hero-ready .hero-intro {
 @keyframes menu-scrim-in { from { opacity: 0 } to { opacity: 1 } }
 
 @media (max-width: 940px) {
-  .nav-container { width: min(100% - 40px, 720px) }
+  .nav-container {
+    width: min(100% - 40px, 720px);
+    justify-content: space-between;
+  }
   .main-nav .nav-links, .main-nav > .nav-container > .nav-cta { display: none }
-  .site-header .nav-toggle { display: block; width: 38px; height: 38px }
-  .site-header .nav-toggle span { left: 7px; width: 24px; height: 2px; border-radius: 2px }
+  .site-header .nav-toggle { display: block; width: 44px; height: 44px }
+  .site-header .nav-toggle span { left: 10px; width: 24px; height: 2px; border-radius: 2px }
   .site-header .mobile-nav {
     display: block;
     visibility: hidden;
@@ -555,6 +635,7 @@ html.hero-ready .hero-intro {
     padding: 58px 0 48px;
   }
   .hero-name { font-size: clamp(3.4rem, 13vw, 5.4rem) }
+  .hero-actions { display: flex; align-items: stretch; flex-direction: column }
   .hero-portrait { width: min(78%, 360px); justify-self: center; aspect-ratio: 5 / 4; border-radius: 28px }
   .hero-portrait img { object-position: center 24% }
   .section-container { width: min(100% - 40px, 620px) }
@@ -574,6 +655,7 @@ html.hero-ready .hero-intro {
   .projects-grid { grid-template-columns: 1fr }
   .project-slot { min-height: 0 }
   .contact-grid { grid-template-columns: 1fr }
+  .office-grid { grid-template-columns: 1fr }
   .contact-card, .contact-details { padding: 22px }
 }
 

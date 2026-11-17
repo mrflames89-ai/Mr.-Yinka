@@ -200,6 +200,21 @@
 
   init();
 
+  var contactForm = document.querySelector(".contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var submitButton = contactForm.querySelector('button[type="submit"]');
+      if (submitButton) {
+        submitButton.textContent = "[Form submission service to be connected]";
+        submitButton.disabled = true;
+      }
+    });
+  }
+
+  var currentYear = document.getElementById("current-year");
+  if (currentYear) currentYear.textContent = new Date().getFullYear();
+
   /* =====================
      10. Smooth scroll for anchor links
      ===================== */
